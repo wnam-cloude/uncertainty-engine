@@ -1,0 +1,35 @@
+{
+ "note": "Credits for the photographs in this folder: photos.mjs credits prints the footer block for the ones the pages use.",
+ "photos": [
+  {
+   "file": "photo-f170299069.webp",
+   "files": [
+    "photo-f170299069-500.webp",
+    "photo-f170299069-960.webp",
+    "photo-f170299069.webp"
+   ],
+   "id": "f170299069",
+   "alt": "Under the Southern Cross (potw1832a)",
+   "by": "ESO/ B. Tafreshi",
+   "licence": "CC BY 4.0",
+   "licenceUrl": "https://creativecommons.org/licenses/by/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Under_the_Southern_Cross_(potw1832a).jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "file": "photo-f162478128.webp",
+   "files": [
+    "photo-f162478128-500.webp",
+    "photo-f162478128-960.webp",
+    "photo-f162478128.webp"
+   ],
+   "id": "f162478128",
+   "alt": "Euclid Deep Field North – preview ESA507291",
+   "by": "European Space Agency",
+   "licence": "CC BY-SA 3.0 igo",
+   "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0/igo/deed.en",
+   "page": "https://commons.wikimedia.org/wiki/File:Euclid_Deep_Field_North_%E2%80%93_preview_ESA507291.jpg",
+   "source": "Wikimedia Commons"
+  }
+ ]
+}
