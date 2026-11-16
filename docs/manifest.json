@@ -1,0 +1,20 @@
+{
+  "name": "Uncertainty Engine",
+  "short_name": "Uncertainty",
+  "description": "Navigate a 3D particle void. Ask questions — answers emerge from the simulation.",
+  "start_url": "/uncertainty-engine/",
+  "display": "fullscreen",
+  "background_color": "#0a0a0f",
+  "theme_color": "#0a0a0f",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='none' stroke='%23c8ff6a' stroke-width='4'/><circle cx='50' cy='50' r='20' fill='%23c8ff6a'/></svg>",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["entertainment", "utilities"],
+  "screenshots": []
+}

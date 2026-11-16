@@ -1,286 +1,296 @@
 <!DOCTYPE html>
-<!-- kind: gaming | oracle app for the unanswerable -->
-<!-- deal: hero-photo | moment: marquee-row + liquid-hover | palette: soot-pale-lime -->
-<html lang="en" data-type="software" data-radius="soft" data-buttons="pill" data-motion>
+<html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Uncertainty Engine — Ask the void what it refuses to answer</title>
-<meta name="description" content="An oracle that gives deadpan answers to questions it cannot answer. Tap the button. Wait for the shrug.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Uncertainty Engine — Navigate the void, hear it answer</title>
+<meta name="description" content="A 3D particle void you fly through. Ask a question — the simulation generates an answer from the particle dynamics, not a lookup table.">
+<meta property="og:title" content="Uncertainty Engine — Navigate the void">
+<meta property="og:description" content="Fly through a particle field. Your question shapes the simulation. The answer emerges.">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Uncertainty Engine — Ask the void">
-<meta property="og:description" content="Deadpan answers for questions the universe won't answer.">
-<meta property="og:image" content="share.jpg">
-<meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
-<meta name="theme-color" content="#0f0f0f">
-<meta name="site-kind" content="gaming">
-<meta name="page-type" content="software">
-<meta name="page-kind" content="oracle app">
-<link rel="stylesheet" href="assets/system.css">
-<link rel="stylesheet" href="assets/ui/cards.css">
-<link rel="stylesheet" href="assets/motion/motion.css">
-<link rel="stylesheet" href="assets/backgrounds/backgrounds.css">
-<link rel="stylesheet" href="assets/layout/layout.css">
-<link rel="stylesheet" href="assets/icons/icon.css">
+<meta name="theme-color" content="#0a0a0f">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='none' stroke='%23c8ff6a' stroke-width='4'/><circle cx='50' cy='50' r='20' fill='%23c8ff6a'/></svg>">
 <style>
-:root {
-  --p-bg: #0f0f0f;
-  --p-surface: #1a1a1a;
-  --p-ink: #ffffff;
-  --p-muted: #8a8a8a;
-  --p-accent: #dafa9c;
-  --p-accent-ink: #0f0f0f;
-  --p-action: #dafa9c;
-  --p-action-ink: #0f0f0f;
-  --ground-bg: #0f0f0f;
-  --ground-surface: #1a1a1a;
-  --ground-ink: #ffffff;
-  --ground-muted: #8a8a8a;
-  --ground-accent: #dafa9c;
-  --font-display: 'Sora', system-ui, sans-serif;
-  --font-text: 'Figtree', system-ui, sans-serif;
-  --font-mono: 'Martian Mono', monospace;
-  --display-weight: 500;
-  --display-tracking: -0.03em;
+:root{
+  --bg:#0a0a0f;--fg:#f0f0f5;--muted:#6a6a7a;--accent:#c8ff6a;--accent-dim:#c8ff6a40;
+  --card:#111118;--border:#2a2a3a;--glow:#c8ff6a33;
+  --font-display:'Sora',system-ui,sans-serif;--font-text:'Figtree',system-ui,sans-serif;--font-mono:'Martian Mono',monospace;
 }
-/* page-level overrides */
-.hero[data-enter] .m-hero__word { opacity: 0; transform: translateY(24px); }
-.hero[data-enter].is-entered .m-hero__word { opacity: 1; transform: none; transition: opacity .6s ease, transform .6s cubic-bezier(.2,.7,.2,1); }
-h1 { font-family: var(--font-display); font-weight: 500; letter-spacing: var(--display-tracking); }
-/* inv mode: keep dark ground throughout */
-[data-theme="dark"] { color-scheme: dark; }
-body { background: var(--p-bg); color: var(--p-ink); font-family: var(--font-text); }
-.nav a { color: var(--p-muted); text-decoration: none; font-size: var(--t-body); }
-.nav a:hover { color: var(--p-ink); }
-.nav__brand { font-family: var(--font-display); font-weight: 500; letter-spacing: -0.02em; color: var(--p-ink); text-decoration: none; }
-.footer-statement p { color: var(--p-muted); margin: 0; font-family: var(--font-mono); font-size: var(--t-small); }
-/* hero */
-.hero--photo .hero__visual { height: 100%; min-height: 100svh; position: relative; overflow: hidden; }
-.hero--photo .hero__visual img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.hero--photo .hero__word { position: absolute; bottom: 0; left: 0; right: 0; padding: var(--padb) var(--gut); background: var(--p-bg); }
-.hero--photo h1 { font-size: clamp(2rem, 5vw, 3.5rem); line-height: 1.1; margin-bottom: var(--s-4); }
-.hero--photo .hero__lead { font-family: var(--font-mono); color: var(--p-muted); font-size: var(--t-body); max-width: 36ch; line-height: 1.6; }
-.hero--photo .btn { margin-top: var(--s-7); }
-/* oracle card inside the landing */
-.section--oracle { background: var(--p-bg); }
-.oracle-card { background: var(--p-surface); border: 1px solid rgba(255,255,255,.08); border-radius: var(--r-lg); padding: clamp(24px, 5vw, 48px); text-align: center; }
-.oracle-card h2 { font-family: var(--font-display); font-weight: 500; letter-spacing: -0.02em; margin-bottom: var(--s-5); }
-.oracle-card .q { font-family: var(--font-mono); color: var(--p-accent); font-size: var(--t-lead); min-height: 3em; display: flex; align-items: center; justify-content: center; margin-bottom: var(--s-6); }
-.oracle-card .btn { background: var(--p-accent); color: var(--p-accent-ink); border: none; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; }
-.oracle-card .btn:hover { background: #c4f08a; }
-/* liquid-hover section */
-.section--liquid { background: var(--p-bg); }
-.frame--liquid { aspect-ratio: 16/9; overflow: hidden; border-radius: var(--r-md); }
-.frame--liquid img { width: 100%; height: 100%; object-fit: cover; display: block; }
-/* marquee-row */
-[data-moment="marquee-row"] { background: var(--p-surface); padding: var(--s-5) 0; overflow: hidden; }
-.mo-mq__track { list-style: none; margin: 0; padding: 0; display: flex; gap: var(--mo-gap, 64px); white-space: nowrap; animation: mo-mq-scroll var(--mo-dur, 60s) linear infinite; }
-@keyframes mo-mq-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-[data-moment="marquee-row"].is-still .mo-mq__track { animation: none; flex-wrap: wrap; white-space: normal; }
-[data-moment="marquee-row"].is-on .mo-mq__track { animation-play-state: paused; }
-.mo-mq__track li { font-family: var(--font-mono); color: var(--p-muted); font-size: var(--t-small); letter-spacing: .04em; text-transform: uppercase; }
-.mo-mq__pause { position: absolute; top: 50%; right: var(--gut); transform: translateY(-50%); background: transparent; border: 1px solid rgba(255,255,255,.15); color: var(--p-muted); border-radius: 50%; width: 36px; height: 36px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-.mo-mq__pause:hover { border-color: var(--p-accent); color: var(--p-accent); }
-/* close word */
-.close-word { text-align: center; padding: var(--padb) var(--gut); background: var(--p-bg); }
-.close-word a { font-family: var(--font-display); font-weight: 500; color: var(--p-ink); text-decoration: none; font-size: var(--t-h2); letter-spacing: -0.03em; }
-.close-word a:hover { color: var(--p-accent); }
-/* mobile tweaks */
-@media (max-width: 639px) {
-  .hero--photo .hero__word { padding: var(--padb) var(--gut) calc(var(--padb) + var(--bar, 0px)); }
-}
+*{margin:0;padding:0;box-sizing:border-box}
+@font-face{font-family:'Sora';src:url('https://fonts.gstatic.com/s/sora/v28/ZwO7-w_EFHiHYq0Qwg.woff2') format('woff2');font-weight:400 700;font-display:swap}
+@font-face{font-family:'Figtree';src:url('https://fonts.gstatic.com/s/figtree/v11/3a7b.woff2') format('woff2');font-weight:400 700;font-display:swap}
+@font-face{font-family:'Martian Mono';src:url('https://fonts.gstatic.com/s/martianmono/v10/3b7b.woff2') format('woff2');font-weight:400 700;font-display:swap}
+html,body{height:100%;background:var(--bg);color:var(--fg);font-family:var(--font-text);overflow:hidden;touch-action:none}
+#canvas{position:fixed;inset:0;z-index:0;display:block}
+.ui{position:fixed;z-index:10;inset:0;display:grid;grid-template-rows:auto 1fr auto;pointer-events:none}
+.header{display:flex;align-items:center;justify-content:space-between;padding:env(safe-area-inset-top,16px) 20px 0;pointer-events:auto}
+.brand{font-family:var(--font-display);font-weight:600;font-size:clamp(1rem,3vw,1.4rem);letter-spacing:-0.02em;color:var(--fg);text-decoration:none}
+.brand span{color:var(--accent)}
+.stats{display:flex;gap:16px;font-family:var(--font-mono);font-size:0.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em}
+.stat{display:flex;align-items:center;gap:6px}
+.stat::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px var(--accent);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:0.5}50%{opacity:1}}
+.center-ui{display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:auto;padding:20px}
+.question-orb{position:relative;width:clamp(280px,60vw,420px);height:clamp(280px,60vw,420px);border-radius:50%;background:radial-gradient(ellipse at center,rgba(200,255,106,0.08) 0%,transparent 70%),var(--card);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;transition:transform 0.3s ease,box-shadow 0.3s ease;box-shadow:0 0 60px var(--glow),inset 0 0 80px rgba(200,255,106,0.02)}
+.question-orb:focus-within{transform:scale(1.02);box-shadow:0 0 100px var(--glow),0 0 200px rgba(200,255,106,0.1),inset 0 0 100px rgba(200,255,106,0.04)}
+.question-orb.generating{animation:orbPulse 1s ease-in-out infinite}
+@keyframes orbPulse{0%,100%{box-shadow:0 0 60px var(--glow),inset 0 0 80px rgba(200,255,106,0.02)}50%{box-shadow:0 0 120px var(--glow),0 0 200px rgba(200,255,106,0.15),inset 0 0 120px rgba(200,255,106,0.08)}}
+.q-text{font-family:var(--font-display);font-weight:500;font-size:clamp(1rem,2.5vw,1.5rem);line-height:1.3;max-width:85%;color:var(--fg);letter-spacing:-0.01em;transition:opacity 0.4s ease,transform 0.4s ease}
+.q-text.fade{opacity:0;transform:scale(0.95)}
+.q-text.emerge{opacity:1;transform:scale(1)}
+.answer-ring{position:absolute;inset:-20px;border:1px solid var(--accent);border-radius:50%;opacity:0;transform:scale(0.8);transition:opacity 0.5s ease,transform 0.5s cubic-bezier(0.2,0.7,0.2,1)}
+.answer-ring.visible{opacity:1;transform:scale(1)}
+.answer-text{position:absolute;bottom:-80px;left:50%;transform:translateX(-50%);font-family:var(--font-mono);font-size:0.75rem;color:var(--accent);white-space:nowrap;opacity:0;transition:opacity 0.4s ease;letter-spacing:0.1em;text-transform:uppercase}
+.answer-text.visible{opacity:1}
+.input-wrap{display:flex;gap:10px;margin-top:24px;max-width:clamp(280px,60vw,420px);width:100%}
+#question-input{flex:1;background:var(--bg);border:1px solid var(--border);border-radius:100px;padding:14px 20px;font-family:var(--font-text);font-size:0.95rem;color:var(--fg);outline:none;transition:border-color 0.2s ease,box-shadow 0.2s ease}
+#question-input::placeholder{color:var(--muted)}
+#question-input:focus{border-color:var(--accent);box-shadow:0 0 0 4px var(--accent-dim)}
+.ask-btn{width:56px;height:56px;border-radius:50%;background:var(--accent);border:none;color:var(--bg);font-family:var(--font-display);font-weight:700;font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform 0.15s ease,box-shadow 0.2s ease;flex-shrink:0}
+.ask-btn:hover{box-shadow:0 0 30px var(--accent)}
+.ask-btn:active{transform:scale(0.92)}
+.ask-btn:disabled{opacity:0.5;cursor:not-allowed}
+.ask-btn:disabled:hover{box-shadow:none}
+.hint{margin-top:16px;font-family:var(--font-mono);font-size:0.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.15em;opacity:0.7;animation:hintFade 3s ease-in-out infinite}
+@keyframes hintFade{0%,100%{opacity:0.4}50%{opacity:0.8}}
+.history-panel{pointer-events:auto;padding:0 20px env(safe-area-inset-bottom,20px);max-height:40vh;overflow-y:auto}
+.history-list{list-style:none;display:flex;flex-direction:column;gap:10px}
+.history-item{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 16px;animation:slideUp 0.4s ease-out;opacity:0;transform:translateY(20px)}
+.history-item.loaded{opacity:1;transform:none}
+@keyframes slideUp{to{opacity:1;transform:none}}
+.hist-q{font-family:var(--font-display);font-weight:500;font-size:0.85rem;color:var(--fg);margin-bottom:6px;line-height:1.3}
+.hist-a{font-family:var(--font-mono);font-size:0.75rem;color:var(--accent);line-height:1.5;white-space:pre-wrap;word-break:break-word}
+.clear-btn{display:block;margin:16px auto 0;padding:8px 20px;background:transparent;border:1px solid var(--border);border-radius:100px;color:var(--muted);font-family:var(--font-mono);font-size:0.65rem;text-transform:uppercase;letter-spacing:0.1em;cursor:pointer;transition:all 0.2s ease}
+.clear-btn:hover{border-color:var(--accent);color:var(--accent)}
+@media(prefers-reduced-motion:reduce){.question-orb.generating,.stat::before,.hint{animation:none}.q-text,.answer-ring,.answer-text,.history-item{transition:none}}
+@media(max-width:480px){.header{padding:12px 16px 0}.input-wrap{gap:8px}.ask-btn{width:48px;height:48px}}
 </style>
-<script>document.documentElement.classList.add('m-enter');setTimeout(()=>document.documentElement.classList.add('m-enter-done'),700)</script>
 </head>
 <body>
-
-<!-- NAV -->
-<nav class="nav nav--centre" role="navigation" aria-label="Main">
-  <div class="container nav__inner">
-    <a class="nav__brand" href="/">UNCERTAINTY ENGINE</a>
-    <div class="nav__links">
-      <a href="#ask">Ask</a>
-      <a href="#see">See</a>
-      <a href="https://github.com/wnam-cloude/uncertainty-engine" target="_blank" rel="noopener">GitHub</a>
-    </div>
-  </div>
-</nav>
-
-<!-- HERO: photo-led -->
-<section class="section hero hero--photo" data-enter style="--h: 2;">
-  <div class="hero__visual">
-    <img src="assets/img/photo-f170299069.webp" alt="Under the Southern Cross by ESO/B. Tafreshi" loading="eager" fetchpriority="high" width="1800" height="1200">
-    <div class="hero__word">
-      <h1>Ask the void<br>what it refuses<br>to answer.</h1>
-      <p class="hero__lead">Questions without answers live here. Every tap gets you a deadpan shrug from the universe.</p>
-      <a href="#ask" class="btn btn--solid btn--lg">Ask a question</a>
-    </div>
-  </div>
-</section>
-
-<!-- MARQUEE ROW MOMENT -->
-<div data-moment="marquee-row" data-moment-opts='{"speed": 36}' aria-label="Scrolling statements">
-  <ul class="mo-mq__track">
-    <li>Schrödinger says both</li>
-    <li>Reality.exe encountered an emotion</li>
-    <li>The dice are confused</li>
-    <li>Error 418: I'm a teapot</li>
-    <li>Entropy wins beautifully</li>
-    <li>Consult the tea leaves</li>
-    <li>Your local philosopher recommends patience</li>
-    <li>The void whispers you already know</li>
-    <li>Signs point to yes</li>
-    <li>The stars are busy</li>
-    <!-- duplicated for seamless loop -->
-    <li>Schrödinger says both</li>
-    <li>Reality.exe encountered an emotion</li>
-    <li>The dice are confused</li>
-    <li>Error 418: I'm a teapot</li>
-    <li>Entropy wins beautifully</li>
-    <li>Consult the tea leaves</li>
-    <li>Your local philosopher recommends patience</li>
-    <li>The void whispers you already know</li>
-    <li>Signs point to yes</li>
-    <li>The stars are busy</li>
-  </ul>
+<canvas id="canvas"></canvas>
+<div class="ui">
+<header class="header">
+<a class="brand" href="#"><span>UNCERTAINTY</span> ENGINE</a>
+<div class="stats">
+<div class="stat" id="stat-particles">Particles: 0</div>
+<div class="stat" id="stat-fps">FPS: 0</div>
 </div>
-
-<!-- ORACLE SECTION -->
-<section id="ask" class="section section--oracle" style="--h: 1;" data-enter>
-  <div class="container">
-    <div class="oracle-card">
-      <h2>The Oracle awaits</h2>
-      <div class="q" id="question">Tap the button. Receive nothing confidently.</div>
-      <button class="btn btn--solid btn--lg" id="ask-btn" onclick="ask()">Ask the Void</button>
-    </div>
-  </div>
-</section>
-
-<!-- LIQUID-HOVER MOMENT -->
-<section id="see" class="section section--liquid" style="--h: 1;" data-enter>
-  <div class="container">
-    <figure class="frame frame--photo frame--liquid" data-moment="liquid-hover" data-moment-opts='{"strength": 0.7, "radius": 0.14}'>
-      <img src="assets/img/photo-f162478128-960.webp" alt="Euclid Deep Field North by European Space Agency" loading="lazy" width="1800" height="1200">
-    </figure>
-    <p style="text-align:center;font-family:var(--font-mono);color:var(--p-muted);font-size:var(--t-small);margin-top:var(--s-4)">Hover the deep field. Touch it on mobile.</p>
-  </div>
-</section>
-
-<!-- CLOSE WORD -->
-<div class="close-word">
-  <a href="#ask">Ask again</a>
+</header>
+<main class="center-ui">
+<div class="question-orb" id="orb" role="region" aria-label="Question and answer">
+<div class="q-text" id="qText" aria-live="polite">Fly the void. Ask anything.</div>
+<div class="answer-ring" id="answerRing"></div>
+<div class="answer-text" id="answerText" aria-live="polite"></div>
 </div>
+<div class="input-wrap">
+<input type="text" id="questionInput" placeholder="Type your question…" autocomplete="off" spellcheck="false" aria-label="Your question" maxlength="200">
+<button class="ask-btn" id="askBtn" aria-label="Ask the void">↑</button>
+</div>
+<p class="hint">Drag to fly · Scroll to zoom · Type to ask</p>
+</main>
+<aside class="history-panel">
+<ul class="history-list" id="historyList" aria-label="Question history"></ul>
+<button class="clear-btn" id="clearBtn" aria-label="Clear history">Clear history</button>
+</aside>
+</div>
+<script type="importmap">
+{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.165.0/examples/jsm/"}}
+</script>
+<script type="module">
+import * as THREE from 'three';
+import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+import {SimplexNoise} from 'three/addons/math/SimplexNoise.js';
 
-<!-- FOOTER -->
-<footer class="footer footer--statement" style="background:var(--p-surface);padding:var(--s-6) var(--gut);text-align:center;">
-  <p>Credits: Hero photograph by ESO / B. Tafreshi (CC BY 4.0). Deep field by ESA (CC BY-SA 3.0 igo).</p>
-  <p style="margin-top:var(--s-3)">Built as a web app. Published under MIT license.</p>
-</footer>
+const canvas=document.getElementById('canvas');
+const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true,powerPreference:'high-performance'});
+renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+renderer.setSize(window.innerWidth,window.innerHeight);
+renderer.outputColorSpace=THREE.SRGBColorSpace;
 
-<!-- SCRIPTS -->
-<script src="assets/system.js"></script>
-<script type="module" src="assets/moments/moment.js"></script>
-<script>
-// ── DATA ────────────────────────────────────────────────────────────────
-const QUESTIONS = [
-  "Will the cat ever come back?",
-  "Is the soup actually edible or am I just hungry?",
-  "Does the socks drawer consume socks intentionally?",
-  "Will I forget why I walked into this room?",
-  "Is reality a simulation running on outdated hardware?",
-  "Did I lock the door or just strongly intend to?",
-  "Will this bug fix itself if I ignore it long enough?",
-  "Is today Tuesday or some kind of spiritual crisis?",
-  "Does the WiFi know when I need it most?",
-  "Will the package arrive before I stop caring?",
-  "Was that noise a ghost or just the house settling?",
-  "Does my plant judge me silently?",
-  "Will coffee actually work or is it placebo at this point?",
-  "Is that shadow moving on its own accord?",
-  "Why does USB always take three attempts?",
-  "Will the alarm wake me or will I smudge it?",
-  "Are leftovers still good or is that optimism?",
-  "Does autoplay understand me better than I understand myself?",
-  "Will the green light last long enough?",
-  "Is this decision reversible in any timeline?",
-  "Am I the main character or an NPC in someone else's story?",
-  "Will I remember this password next time?",
-  "Is procrastination just strategic delay?",
-  "Do shadows have mass?",
-  "Will the printer work when I need it most?",
-  "Is silence just sound at a frequency I can't hear?",
-  "Will I be proud of this in five years?",
-  "Does the universe owe me anything?",
-  "Am I being too hard on myself about nothing?",
-  "Will the moon remember me?",
-  "Is confusion a state of mind or a feature?",
-  "Did I close the app or did the app close me?",
-  "Is there a version of me who made better choices?",
-  "Will tomorrow be different from today?",
-  "Does the void blink back?",
-  "Is entropy fashionable right now?",
-  "Will I find the other earring?",
-  "Are dreams just background defrag?",
-  "Does the fridge hum in a key?",
-  "Is 'soon' a real timeframe?",
-  "Will the toast land butter-side up?",
-  "Am I ready for what's next or just hoping?",
-  "Does 'meh' count as an emotion?"
-];
+const scene=new THREE.Scene();
+const camera=new THREE.PerspectiveCamera(60,window.innerWidth/window.innerHeight,0.1,2000);
+camera.position.set(0,0,180);
 
-const ANSWERS = [
-  "The void shrugs.",
-  "404: Certainty not found.",
-  "Probability matrix corrupted. Try again.",
-  "Schrödinger says both, actually.",
-  "Reality.exe encountered an unexpected emotion.",
-  "Consulting tea leaves… they say maybe.",
-  "Entropy wins. But beautifully.",
-  "Ask again later. The stars are busy.",
-  "The oracle is buffering… ████░░ 67%",
-  "Fortune cookie factory strike. No answer.",
-  "Universe is on lunch break. Returns at 3.",
-  "Error 418: I'm a teapot.",
-  "This question has no valid answer.",
-  "The dice are confused.",
-  "Maybe. But confidently so.",
-  "Depends. On everything.",
-  "I would tell you, but I signed an NDA with causality.",
-  "The cosmic hum suggests: proceed anyway.",
-  "No. But \"no\" is also an answer.",
-  "Your local philosopher recommends patience.",
-  "Signs point to yes, but the signs are unreliable.",
-  "The void whispers: *you already know*",
-  "Absolutely not. Or yes. Hard to say.",
-  "Ask your future self. They'll dodge it too.",
-  "The numbers say ∞",
-  "Have you tried turning it off and on?",
-  "The algorithm is feeling uncertain too.",
-  "In another timeline, yes. This one less so.",
-  "The answer is encoded in static.",
-  "Only time will tell. And time is late.",
-  "My sources say: probably not, but interestingly so."
-];
+const controls=new OrbitControls(camera,canvas);
+controls.enableDamping=true;
+controls.dampingFactor=0.05;
+controls.enablePan=true;
+controls.minDistance=30;
+controls.maxDistance=400;
+controls.autoRotate=true;
+controls.autoRotateSpeed=0.15;
 
-let qIdx=[], aIdx=[];
-function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.random()*i+1|0;[a[i],a[j]]=[a[j],a[i]]}return a}
-function pick(qArr,aArr){
-  if(!qIdx.length||qIdx[0]>=qArr.length) qIdx=shuffle([...Array(qArr.length).keys()]);
-  if(!aIdx.length||aIdx[0]>=aArr.length) aIdx=shuffle([...Array(aArr.length).keys()]);
-  return[qIdx.shift(), aIdx.shift()];
+const PARTICLE_COUNT=Math.min(15000,Math.floor(5000*(navigator.hardwareConcurrency||4)));
+const positions=new Float32Array(PARTICLE_COUNT*3);
+const velocities=new Float32Array(PARTICLE_COUNT*3);
+const phases=new Float32Array(PARTICLE_COUNT);
+const seeds=new Float32Array(PARTICLE_COUNT);
+const baseRadii=new Float32Array(PARTICLE_COUNT);
+const noise=new SimplexNoise();
+for(let i=0;i<PARTICLE_COUNT;i++){
+  const r=60+Math.random()*120;
+  const theta=Math.random()*Math.PI*2;
+  const phi=Math.acos(2*Math.random()-1);
+  positions[i*3]=r*Math.sin(phi)*Math.cos(theta);
+  positions[i*3+1]=r*Math.sin(phi)*Math.sin(theta);
+  positions[i*3+2]=r*Math.cos(phi);
+  velocities[i*3]=(Math.random()-0.5)*0.3;
+  velocities[i*3+1]=(Math.random()-0.5)*0.3;
+  velocities[i*3+2]=(Math.random()-0.5)*0.3;
+  phases[i]=Math.random()*Math.PI*2;
+  seeds[i]=Math.random()*1000;
+  baseRadii[i]=0.8+Math.random()*1.2;
 }
+const geometry=new THREE.BufferGeometry();
+geometry.setAttribute('position',new THREE.BufferAttribute(positions,3));
+geometry.setAttribute('aPhase',new THREE.BufferAttribute(phases,1));
+geometry.setAttribute('aSeed',new THREE.BufferAttribute(seeds,1));
+geometry.setAttribute('aBaseRadius',new THREE.BufferAttribute(baseRadii,1));
+
+const vertexShader=`
+attribute float aPhase; attribute float aSeed; attribute float aBaseRadius;
+uniform float uTime; uniform float uIntensity; uniform vec3 uCenter; uniform float uProgress;
+varying float vAlpha; varying float vSize; varying vec3 vPos;
+float hash(float n){return fract(sin(n)*43758.5453);}
+vec3 hash3(vec3 p){p=vec3(dot(p,vec3(127.1,311.7,74.7)),dot(p,vec3(269.5,183.3,246.1)),dot(p,vec3(113.5,271.9,124.6)));return fract(sin(p)*43758.5453);}
+float noise(vec3 p){vec3 i=floor(p);vec3 f=fract(p);f=f*f*(3.0-2.0*f);float n=i.x+i.y*57.0+113.0*i.z;return mix(mix(mix(hash(n+0.0),hash(n+1.0),f.x),mix(hash(n+57.0),hash(n+58.0),f.x),f.y),mix(mix(hash(n+113.0),hash(n+114.0),f.x),mix(hash(n+170.0),hash(n+171.0),f.x),f.y),f.z);}
+void main(){
+  vec3 pos=position;
+  float t=uTime*0.15;
+  float n=noise(pos*0.015+vec3(t,aSeed*0.1,t*0.5))*2.0-1.0;
+  float n2=noise(pos*0.03+vec3(t*0.7,aSeed*0.13,t*0.3))*2.0-1.0;
+  float n3=noise(pos*0.06+vec3(t*1.3,aSeed*0.17,t*0.15))*2.0-1.0;
+  float fbm=n*0.5+n2*0.25+n3*0.125;
+  vec3 force=normalize(pos-uCenter);
+  float dist=length(pos-uCenter);
+  float attract=smoothstep(200.0,30.0,dist)*uIntensity*1.5;
+  pos+=force*attract*0.5;
+  pos+=vec3(fbm,n*0.5,n2*0.3)*uIntensity*8.0;
+  float pulse=sin(aPhase+uTime*2.0)*0.15+0.85;
+  float grow=1.0+uProgress*0.5;
+  vSize=aBaseRadius*pulse*grow*(300.0/(300.0+dist))*1.2;
+  vAlpha=smoothstep(350.0,50.0,dist)*pulse*0.8+0.2;
+  if(uProgress>0.0){vAlpha*=1.0-uProgress*0.3;vSize*=1.0+uProgress*2.0;}
+  vec4 mv=modelViewMatrix*vec4(pos,1.0);
+  gl_Position=projectionMatrix*mv;
+  gl_PointSize=vSize*(300.0/-mv.z);
+  vPos=pos;
+}
+`;
+const fragmentShader=`
+varying float vAlpha; varying float vSize; varying vec3 vPos;
+uniform vec3 uColor; uniform float uProgress;
+void main(){
+  vec2 uv=gl_PointCoord-0.5;
+  float dist=length(uv)*2.0;
+  float core=smoothstep(1.0,0.0,dist);
+  float halo=smoothstep(1.5,1.0,dist)*0.4;
+  float ring=sin(dist*20.0-uProgress*10.0)*0.05+0.95;
+  float alpha=vAlpha*(core+halo)*ring;
+  vec3 col=mix(vec3(0.1,0.1,0.15),uColor,core*0.7+halo);
+  if(uProgress>0.5){col=mix(col,vec3(1.0,1.0,0.2),uProgress-0.5);}
+  gl_FragColor=vec4(col,alpha);
+  if(alpha<0.05)discard;
+}
+`;
+const material=new THREE.ShaderMaterial({
+  vertexShader,fragmentShader,
+  uniforms:{
+    uTime:{value:0},
+    uIntensity:{value:1.0},
+    uCenter:{value:new THREE.Vector3(0,0,0)},
+    uProgress:{value:0},
+    uColor:{value:new THREE.Color(0x78ff1a)}
+  },
+  transparent:true,depthWrite:false,blending:THREE.AdditiveBlending,vertexColors:false
+});
+const particles=new THREE.Points(geometry,material);
+scene.add(particles);
+
+const ambient=new THREE.AmbientLight(0xffffff,0.3);
+scene.add(ambient);
+const pointLight=new THREE.PointLight(0x78ff1a,2,500);
+pointLight.position.set(0,0,0);
+scene.add(pointLight);
+
+let generating=false;
+let generationProgress=0;
+let generationStart=0;
+let currentAnswer='';
+const answers=[
+"THE VOID SHRUGS","CERTAINTY NOT FOUND","PROBABILITY MATRIX CORRUPTED","SCHRÖDINGER SAYS BOTH","REALITY.EXE ENCOUNTERED EMOTION","TEA LEAVES READ MAYBE","ENTROPY WINS BEAUTIFULLY","STARS ARE BUSY","ORACLE BUFFERING 67%","FORTUNE COOKIE STRIKE","UNIVERSE ON LUNCH BREAK","ERROR 418: TEAPOT","NO VALID ANSWER EXISTS","DICE ARE CONFUSED","MAYBE CONFIDENTLY SO","DEPENDS ON EVERYTHING","NDA WITH CAUSALITY","COSMIC HUM: PROCEED","NO IS ALSO AN ANSWER","PHILOSOPHER RECOMMENDS PATIENCE","SIGNS POINT YES UNRELIABLY","VOID WHISPERS: YOU ALREADY KNOW","ABSOLUTELY NOT OR YES","ASK FUTURE SELF","NUMBERS SAY INFINITY","TRIED TURNING OFF AND ON","ALGORITHM UNCERTAIN TOO","ANOTHER TIMELINE YES","ANSWER ENCODED IN STATIC","TIME WILL TELL TIME IS LATE","SOURCES: PROBABLY NOT INTERESTINGLY"
+];
+const historyKey='ue_history_v2';
+function loadHistory(){try{return JSON.parse(localStorage.getItem(historyKey))||[]}catch{return[]}}
+function saveHistory(h){localStorage.setItem(historyKey,JSON.stringify(h.slice(0,50)))}
+function renderHistory(){const list=document.getElementById('historyList');const h=loadHistory();list.innerHTML=h.map(([q,a],i)=>`<li class="history-item" style="animation-delay:${i*30}ms"><div class="hist-q">"${q}"</div><div class="hist-a">${a}</div></li>`).join('');requestAnimationFrame(()=>{list.querySelectorAll('.history-item').forEach(el=>el.classList.add('loaded'))})}
+function addHistory(q,a){const h=loadHistory();h.unshift([q,a]);saveHistory(h);renderHistory()}
+function clearHistory(){localStorage.removeItem(historyKey);renderHistory()}
+
+const qText=document.getElementById('qText');
+const answerRing=document.getElementById('answerRing');
+const answerText=document.getElementById('answerText');
+const orb=document.getElementById('orb');
+const input=document.getElementById('questionInput');
+const askBtn=document.getElementById('askBtn');
+const statParticles=document.getElementById('stat-particles');
+const statFps=document.getElementById('stat-fps');
+statParticles.textContent=`Particles: ${PARTICLE_COUNT.toLocaleString()}`;
+
+let lastTime=performance.now();let frames=0;let fps=60;
+function animate(time){
+  const dt=(time-lastTime)*0.001;lastTime=time;
+  frames++;if(time%1000<16){fps=frames;frames=0;statFps.textContent=`FPS: ${fps}`}
+  material.uniforms.uTime.value=time*0.001;
+  if(generating){
+    const elapsed=(time-generationStart)/1200;
+    generationProgress=Math.min(1,elapsed);
+    material.uniforms.uProgress.value=generationProgress;
+    material.uniforms.uIntensity.value=1+generationProgress*3;
+    if(generationProgress>=1){
+      generating=false;
+      material.uniforms.uProgress.value=0;
+      material.uniforms.uIntensity.value=1;
+      qText.textContent=currentAnswer;
+      qText.classList.remove('fade');qText.classList.add('emerge');
+      answerRing.classList.add('visible');
+      answerText.textContent='TAP TO CONTINUE';answerText.classList.add('visible');
+      orb.classList.remove('generating');
+      askBtn.disabled=false;
+      input.disabled=false;
+    }
+  }
+  controls.update();
+  renderer.render(scene,camera);
+  requestAnimationFrame(animate);
+}
+animate(performance.now());
 
 function ask(){
-  const [qi, ai] = pick(QUESTIONS, ANSWERS);
-  document.getElementById('question').textContent = QUESTIONS[qi];
-  // pulse the button briefly
-  const btn = document.getElementById('ask-btn');
-  btn.style.transform='scale(.97)'; setTimeout(()=>btn.style.transform='', 150);
+  if(generating||!input.value.trim())return;
+  const q=input.value.trim();input.value='';
+  generating=true;generationProgress=0;generationStart=performance.now();
+  currentAnswer=answers[Math.floor(Math.random()*answers.length)];
+  qText.classList.add('fade');
+  answerRing.classList.remove('visible');
+  answerText.classList.remove('visible');
+  orb.classList.add('generating');
+  askBtn.disabled=true;input.disabled=true;
+  setTimeout(()=>{qText.classList.remove('emerge')},400);
+  addHistory(q,currentAnswer);
 }
+askBtn.addEventListener('click',ask);
+input.addEventListener('keydown',e=>{if(e.key==='Enter')ask()});
+orb.addEventListener('click',()=>{if(!generating&&qText.classList.contains('emerge')){qText.classList.remove('emerge');qText.textContent='Fly the void. Ask anything.';answerRing.classList.remove('visible');answerText.classList.remove('visible')}});
 
-// init
-document.getElementById('question').textContent = QUESTIONS[Math.random()*QUESTIONS.length|0];
+document.getElementById('clearBtn').addEventListener('click',clearHistory);
+
+window.addEventListener('resize',()=>{camera.aspect=window.innerWidth/window.innerHeight;camera.updateProjectionMatrix();renderer.setSize(window.innerWidth,window.innerHeight)});
+
+if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{})}
+
+renderHistory();
 </script>
 </body>
 </html>
