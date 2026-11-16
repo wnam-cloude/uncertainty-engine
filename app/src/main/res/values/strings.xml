@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Uncertainty Engine</string>
+    <string name="subtitle">An oracle for life\'s unanswerable questions</string>
+    <string name="tap_to_ask">Tap the button to ask the void…</string>
+    <string name="ask_the_void">ASK THE VOID</string>
+    <string name="history">Recent Consultations</string>
+</resources>
